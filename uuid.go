@@ -2,7 +2,6 @@ package uuid
 
 import (
 	"crypto/rand"
-	"math"
 )
 
 var hex = "abcdef0123456789"
@@ -27,4 +26,12 @@ func NextUUID() UUID {
 		uuid[i] = hex[int(b) % len(hex)]
 	}
 	return format(uuid)
+}
+
+func Match(id1, id2 UUID) bool {
+	return id1 == id2
+}
+
+func (id1 UUID) Match(id2 UUID) bool {
+	return Match(id1, id2)
 }
