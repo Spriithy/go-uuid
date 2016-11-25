@@ -5,13 +5,13 @@ import (
 	"errors"
 )
 
+// A UUID is a Universal Unique IDentifier
+type UUID string
+
 var hex = "abcdef0123456789"
 
 // Length is the generic UUID length
-const Length = len("")
-
-// A UUID is a Universal Unique IDentifier
-type UUID string
+const Length = len("xxxxxxxx-xxxx-xxxx-xxxxxxxxxxxxxxxx")
 
 func format(bytes []byte) UUID {
 	uuid := UUID("")
@@ -29,6 +29,7 @@ func isHex(c byte) bool {
 	return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')
 }
 
+// ParseUUID parses an input string to an actual UUID instance
 func ParseUUID(src string) (UUID, error) {
 	for i := 0; i < Length; i++ {
 		switch i {
@@ -45,6 +46,7 @@ func ParseUUID(src string) (UUID, error) {
 	return UUID(src), nil
 }
 
+// NextUUID is the actual UUID generator
 func NextUUID() UUID {
 	uuid := make([]byte, 32)
 	rand.Read(uuid)
@@ -54,10 +56,13 @@ func NextUUID() UUID {
 	return format(uuid)
 }
 
+// Match statically check two UUID are equal
 func Match(id1, id2 UUID) bool {
 	return id1 == id2
 }
 
+// Match is used on an UUID instance to check wether it
+// matches another one
 func (id1 UUID) Match(id2 UUID) bool {
 	return Match(id1, id2)
 }
