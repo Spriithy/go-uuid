@@ -6,7 +6,7 @@ import (
 )
 
 // A UUID is a Universal Unique IDentifier
-type UUID string
+type UUID = string
 
 var hex = "abcdef0123456789"
 
@@ -14,7 +14,7 @@ var hex = "abcdef0123456789"
 const Length = len("xxxxxxxx-xxxx-xxxx-xxxxxxxxxxxxxxxx")
 
 func format(bytes []byte) UUID {
-	uuid := UUID("")
+	uuid := ""
 	for i := 0; i < 32; i++ {
 		switch i {
 		case 8, 12, 16:
@@ -29,8 +29,8 @@ func isHex(c byte) bool {
 	return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')
 }
 
-// ParseUUID parses an input string to an actual UUID instance
-func ParseUUID(src string) (UUID, error) {
+// ValidateUUID parses an input string and checks its validity
+func ValidateUUID(src string) (UUID, error) {
 	for i := 0; i < Length; i++ {
 		switch i {
 		case 8, 12, 16:
