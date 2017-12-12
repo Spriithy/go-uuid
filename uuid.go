@@ -55,14 +55,3 @@ func NextUUID() UUID {
 	}
 	return format(uuid)
 }
-
-// Match statically check two UUID are equal
-func Match(id1, id2 UUID) bool {
-	return id1 == id2
-}
-
-// Match is used on an UUID instance to check wether it
-// matches another one
-func (id1 UUID) Match(id2 UUID) bool {
-	return Match(id1, id2)
-}
